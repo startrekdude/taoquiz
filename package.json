@@ -1,0 +1,31 @@
+{
+  "name": "taoquiz",
+  "version": "1.0.0",
+  "description": "An opinionated tool to create beautiful, lightweight, static HTML/CSS practice quizzes. Full support for MathJax.",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "taoquiz": "./taoquiz.js"
+  },
+  "files": [
+    "taoquiz.js",
+    "taoquiz.css",
+    "taoquiz.pug",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:startrekdude/taoquiz.git"
+  },
+  "author": "Sam Haskins",
+  "license": "BSD-3-Clause",
+  "homepage": "https://github.com/startrekdude/taoquiz#readme",
+  "dependencies": {
+    "mathjax-full": "^3.2.0",
+    "pug": "^3.0.2",
+    "xml2js": "^0.4.23"
+  }
+}

@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<quiz
+	lang="en"
+	title="Winter '19 Final"
+	subtitle="(COMP 2804, from cglab.ca/~michiel/2804/oldexams/oldexams.html)"
+	mathjax="mathjax">
+
+	<multiple-choice>
+		<question>
+			Consider strings of length 85, in which each character is one of the letters $a, b, c, d$.
+			How many such strings have exactly 5 letters $c$?
+		</question>
+		<answer correct="correct">${85 \choose 5} \cdot 3^{80}$</answer>
+		<answer>${85 \choose 5} \cdot 3^{85}$</answer>
+		<answer>${85 \choose 5} \cdot 4^{80}$</answer>
+		<answer>${85 \choose 5} \cdot 4^{85}$</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			Consider strings of length 85, in which each character is one of the letters $a, b, c, d$.
+			How many such strings have exactly 15 letters $a$ and exactly 30 letters $d$?
+		</question>
+		<answer correct="correct">${85 \choose 15} \cdot {70 \choose 30} \cdot 2^{40}$</answer>
+		<answer>${85 \choose 15} \cdot {70 \choose 30} \cdot 3^{40}$</answer>
+		<answer>${85 \choose 15} \cdot {70 \choose 30} \cdot 4^{40}$</answer>
+		<answer>None of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			Consider a set $S$ consisting of 25 beer bottles $b_1,b_2,...,b_{25}$ and 30 cider bottles $c_1,c_2,...,c_{30}$.
+			How many 10-element subsets of $S$ contain at least 2 beer bottles?
+		</question>
+		<answer>${55 \choose 10} - {30 \choose 10} - {30 \choose 9}$</answer>
+		<answer>${55 \choose 10} - {30 \choose 10} - 25 \cdot {29 \choose 9}$</answer>
+		<answer correct="correct">${55 \choose 10} - {30 \choose 10} - 25 \cdot {30 \choose 9}$</answer>
+		<answer>${55 \choose 10} - {30 \choose 10} - 25 \cdot {30 \choose 10}$</answer>
+	</multiple-choice>
+	<short-answer answer-pattern="105">
+	<![CDATA[
+			Consider the sets $A = \{1,2,...,10\}$ and $B = \{1,2,...,14\}$.
+			Let $S = \{(x,y) : x \in A, y \in B\}$.
+			An element $(x,y)$ of $S$ is <em>awesome</em>, if $x$ is even or $y$ is even.
+			What is the number of awesome elements in $S$?
+	]]>
+	</short-answer>
+	<multiple-choice>
+		<question>
+			Let $m \geq 2$ and $n \geq 2$ be integers. Why does the identity
+			$$
+				{m + n \choose 2} = {m \choose 2} + {n \choose 2} + mn
+			$$
+			hold?
+		</question>
+		<answer>
+			Because both sides count the number of ways $m$ men and $n$ women can be arranged on a line,
+			such that no two men are standing next to each other.
+		</answer>
+		<answer>Because both sides count the number of ordered pairs in a set of size $m + n$.</answer>
+		<answer correct="correct">
+			Because both sides count the number of 2-element subsets of a set of size $m + n$.
+		</answer>
+		<answer>None of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			What is the coefficient of $x^{20}y^{35}$ in the expansion of $(5x - 3y)^{55}$?
+		</question>
+		<answer>${55 \choose 20} \cdot 5^{35} \cdot 3^{20}$</answer>
+		<answer>$-{55 \choose 20} \cdot 5^{35} \cdot 3^{20}$</answer>
+		<answer>${55 \choose 35} \cdot 5^{20} \cdot 3^{35}$</answer>
+		<answer correct="correct">$-{55 \choose 35} \cdot 5^{20} \cdot 3^{35}$</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			A string that is obtained by rearranging the letters of the word
+			<p style="text-align: center;">POOPERSCOOPER</p>
+			is called <em>cool</em>, if each occurrence of E has the letter R to its left or
+			right, and each occurrence of R has the letter E to its left or right. Thus, both
+			<p style="text-align: center;">POOPERSCOOPER</p>
+			and
+			<p style="text-align: center;">OPRECSOOOERPP</p>
+			are cool, whereas
+			<p style="text-align: center;">EPOOPRSCOOPER</p>
+			is not cool. What is the number of cool strings?
+		]]></question>
+		<answer>${11 \choose 3} \cdot {8 \choose 4} \cdot {4 \choose 2} \cdot {2 \choose 1} \cdot {1 \choose 1}$</answer>
+		<answer>${11 \choose 3} \cdot {8 \choose 4} \cdot {4 \choose 2} \cdot {2 \choose 1} \cdot {1 \choose 1} \cdot 2$</answer>
+		<answer>${11 \choose 3} \cdot {8 \choose 4} \cdot {4 \choose 2} \cdot {2 \choose 1} \cdot {1 \choose 1} \cdot 3$</answer>
+		<answer correct="correct">
+			${11 \choose 3} \cdot {8 \choose 4} \cdot {4 \choose 2} \cdot {2 \choose 1} \cdot {1 \choose 1} \cdot 4$
+		</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			A bitstring is called 00-<em>free</em>, if it does not contain two 0's next to each other.
+			In class, we have seen that for any $m \geq 1$, the number of 00-free bitstrings of length $m$
+			is equal to the $(m + 2)$-th Fibonacci number $f_{m+2}$.<br>
+			What is the number of 00-free bitstrings of length 20 that have 1 at position 11 and 0 at
+			position 20? (The positions are numbered $1,2,...,20$.)
+		]]></question>
+		<answer>$f_{10} \cdot f_{12}$</answer>
+		<answer correct="correct">$f_9 \cdot f_{12}$</answer>
+		<answer>$f_8 \cdot f_{11}$</answer>
+		<answer>$f_7 \cdot f_{10}$</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			Consider bitstrings that do not contain 011 and have 1 at every even position.
+			(The positions are numbered $1,2,3,...$). Let $S_n$ be the number of such strings having
+			length $n$. Which of the following is true for any $n \geq 3$?
+		</question>
+		<answer>$S_n = 1 + S_{n - 1}$</answer>
+		<answer correct="correct">$S_n = 1 + S_{n - 2}$</answer>
+		<answer>$S_n = S_{n - 1} + S_{n - 3}$</answer>
+		<answer>$S_n = S_{n - 2} + S_{n - 3}$</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			The function $f : \mathbb{N} \rightarrow \mathbb{N}$ is recursively defined as follows:
+			$$
+				\begin{align}
+				f(0) &= 2 \\
+				f(n) &= 3 \cdot f(n - 1) + 1, \text{ if } n \geq 1
+				\end{align}
+			$$
+			Which of the following is true for all integers $n \geq 0$?
+		]]></question>
+		<answer>$f(n) = \frac{5}{2} \cdot 3^n - 1$</answer>
+		<answer>$f(n) = \frac{3}{2} \cdot 3^n - \frac{1}{2}$</answer>
+		<answer correct="correct">$f(n) = \frac{5}{2} \cdot 3^n - \frac{1}{2}$</answer>
+		<answer>None of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			You flip a fair coin 6 times; the flips are independent of each other.
+			What is the probability that in these 6 coin flips, the coin comes up heads exactly
+			3 times?
+		</question>
+		<answer>3/16</answer>
+		<answer>4/16</answer>
+		<answer correct="correct">5/16</answer>
+		<answer>6/16</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			In a standard deck of 52 cards, each card has a <em>suit</em> and a <em>rank</em>.
+			There are four suits (spades ♠, hearts ♡, clubs ♣, and diamonds ♢), and 13 ranks
+			(Ace, 2,3,4,5,6,7,8,9,10, Jack, Queen, and King). <br>
+			Assume you get a uniformly random hand consisting of 5 cards. What is the probability
+			that the 5 cards in this hand consist of 3 Aces and 2 Queens?
+		]]></question>
+		<answer correct="correct">$\left. 24 \middle/ {52 \choose 5} \right.$</answer>
+		<answer>$\left. 25 \middle/ {52 \choose 5} \right.$</answer>
+		<answer>$\left. 26 \middle/ {52 \choose 5} \right.$</answer>
+		<answer>$\left. 27 \middle/ {52 \choose 5} \right.$</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			You flip a fair coin 6 times; the flips are independent of each other. Consider the events
+			$$
+				\begin{align}
+				A &= \text{``exactly 3 flips result in heads"}, \\
+				B &= \text{``at least 2 flips result in heads"}.
+				\end{align}
+			$$
+			What is $\Pr(A|B)$?
+		]]></question>
+		<answer>17/57</answer>
+		<answer>18/57</answer>
+		<answer>19/57</answer>
+		<answer correct="correct">20/57</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			Let $n$ and $k$ be integers with $0 \leq k \leq n$. <br>
+			You are given two bitstrings $a_1,a_2,...,a_n$ and $b_1,b_2,...,b_n$, both of length $n$.
+			In both bitstrings, each bit is 0 with probability 1/2, and 1 with probability 1/2
+			(independent of all other bits). <br>
+			For each $i$ with $1 \leq i \leq n$, let $c_i = a_i - b_i$. Consider the set
+			$$
+				P = \{i : 1 \leq i \leq n \text{ and } c_i \geq 0\}.
+			$$
+			What is the probability that the size of the set $P$ is equal to $k$?
+		]]></question>
+		<answer>${n \choose k} \cdot (3/4)^{n - k} \cdot (1/4)^k$</answer>
+		<answer correct="correct">${n \choose k} \cdot (3/4)^k \cdot (1/4)^{n - k}$</answer>
+		<answer>${n \choose k} \cdot (3/4)^k \cdot (1/2)^k$</answer>
+		<answer>None of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			Consider a uniformly random permutation $a_1,a_2,a_3,a_4,a_5$ of the set $\{1,2,3,4,5\}$.
+			Consider the events
+			$$
+				\begin{align}
+				A &= \text{``}a_1\text{ is odd"}, \\
+				B &= \text{``}a_5\text{ is even"}.
+				\end{align}
+			$$
+			Which of the following is correct?
+		]]></question>
+		<answer>The events $A$ and $B$ are independent.</answer>
+		<answer correct="correct">The events $A$ and $B$ are not independent.</answer>
+		<answer>None of the above.</answer>
+		<answer>All of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			You roll a fair red die once and you roll a fair blue die once. These two rolls are independent.
+			Consider the events
+			$$
+				\begin{align}
+				A &= \text{``the sum of the red die and the blue die is 5"}, \\
+				B &= \text{``the result of the red die is even"}.
+				\end{align}
+			$$
+			Which of the following is correct?
+		]]></question>
+		<answer correct="correct">The events $A$ and $B$ are independent.</answer>
+		<answer>The events $A$ and $B$ are not independent.</answer>
+		<answer>None of the above.</answer>
+		<answer>All of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			Let $n \geq 8$ be an integer. Consider a uniformly random permutation $a_1,a_2,...,a_n$ of
+			the set $\{1,2,...,n\}$. Consider the events
+			$$
+				\begin{align}
+				A &= \text{``$a_7$ is the minimum of $a_1,a_2,...,a_7$"}, \\
+				B &= \text{``$a_6$ is the minimum of $a_1,a_2,...,a_6$"}.
+				\end{align}
+			$$
+			Which of the following is correct?
+		]]></question>
+		<answer correct="correct">The events $A$ and $B$ are independent.</answer>
+		<answer>The events $A$ and $B$ are not independent.</answer>
+		<answer>None of the above.</answer>
+		<answer>All of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			Let $A$ and $B$ be two independent events in some sample space $S$. Recall that $\overline{B}$
+			denotes the complement of $B$. You are given that $\Pr(A) = 1/4$ and $\Pr(\overline{B}) = 2/3$.
+			What is $\Pr(A \cup B)$?
+		</question>
+		<answer>3/4</answer>
+		<answer>2/3</answer>
+		<answer correct="correct">1/2</answer>
+		<answer>1/3</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			A red box contains the numbers 0, 1, and 2; a blue box contains the numbers 0 and 1;
+			and a green box contains the numbers 1 and 2. Consider the following two steps:
+			<span style="display: block; margin-top: 0.5rem;"></span>
+			<strong>Step 1:</strong> Choose a uniformly random number from the red box, and denote it by $x$. <br>
+			<strong>Step 2:</strong>
+			<ul style="text-indent: 0">
+				<li>If $x = 0$ or $x = 2$, then choose a uniformly random number from the green box, and denote it by $y$.</li>
+				<li>Otherwise (i.e., if $x = 1$), choose a uniformly random number from the blue box, and denote it by $y$.</li>
+			</ul>
+			Consider the random variables
+			$$
+				\begin{align}
+				X &= \text{the number $x$ you choose in Step 1}, \\
+				Y &= \text{the number $y$ you choose in Step 2}, \\
+				Z &= \text{max($X,Y$)}.
+				\end{align}
+			$$
+			What is the expected value $\mathbb{E}(Z)$ of the random variable $Z$?
+		]]></question>
+		<answer>1</answer>
+		<answer correct="correct">3/2</answer>
+		<answer>2</answer>
+		<answer>None of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question><![CDATA[
+			Let $n \geq 2$ be an integer. Consider a string $c_1,c_2,...,c_n$ of length $n$, in which each character
+			$c_i$ is a uniformly random element of the set $\{1,2,3\}$ (independently of all other characters).
+			Consider the random variable $X$ whose value is the number of indices $i$ with $1 \leq i < n$ for
+			which the product $c_i \cdot c_{i + 1}$ is odd. <br>
+			What is the expected value $\mathbb{E}(X)$ of the random variable $X$? <br>
+			<em>Hint:</em> Use indicator random variables.
+		]]></question>
+		<answer>$\frac{2}{3} \cdot n$</answer>
+		<answer>$\frac{2}{3} \cdot (n - 1)$</answer>
+		<answer>$\frac{4}{9} \cdot n$</answer>
+		<answer correct="correct">$\frac{4}{9} \cdot (n - 1)$</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			Let $n \geq 2$ be an integer. You are given $n$ beer bottles $B_1,B_2,...,B_n$ and two cider bottles $C_1$ and $C_2$.
+			Consider a uniformly random permutation of these $n + 2$ bottles. The positions in this permutation are
+			numbered $1,2,...,n + 2$. Consider the random variable
+			$$
+				X = \text{the position of the leftmost beer bottle}.
+			$$
+			What is the expected value $\mathbb{E}(Z)$ of the random variable $Z$?
+		</question>
+		<answer>$\frac{n}{n + 2} + \frac{2n + 6}{(n + 1)(n + 2)}$</answer>
+		<answer>$\frac{n}{n + 2} + \frac{2n + 2}{(n + 1)(n + 2)}$</answer>
+		<answer correct="correct">$\frac{n}{n + 2} + \frac{4n + 6}{(n + 1)(n + 2)}$</answer>
+		<answer>$\frac{n}{n + 2} + \frac{4n + 2}{(n + 1)(n + 2)}$</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			When a couple has a child, this child is a boy with probability 1/2 and a girl with probability 1/2,
+			independent of the gender of the other children. A couple stops having children as soon as they have
+			2 girls or 2 boys. Consider the random variables
+			$$
+				G = \text{the number of girls the couple has},
+			$$
+			and
+			$$
+				B = \text{the number of boys the couple has}.
+			$$
+			Which of the following is correct?
+		</question>
+		<answer>The random variables $G$ and $B$ are independent.</answer>
+		<answer correct="correct">The random variables $G$ and $B$ are not independent.</answer>
+		<answer>None of the above.</answer>
+		<answer>All of the above.</answer>
+	</multiple-choice>
+	<short-answer answer-pattern="6">
+	<![CDATA[
+		You are given a fair red die and a fair blue die. Consider the following experiment:
+		<p style="text-align: center;">Experiment: Roll each die once and take the sum of the two rolls.</p>
+		You repeat this experiment until the sum of the two rolls is equal to 7. <br>
+		Consider the random variable
+		$$
+			X = \text{the number of times you do the experiment}.
+		$$
+		(This value $X$ includes the experiment in which the sum is 7 for the first time.) <br>
+		What is the expected value $\mathbb{E}(X)$ of the random variable $X$?
+	]]>
+	</short-answer>
+	<multiple-choice>
+		<question><![CDATA[
+			Let $n \geq 2$ be an integer, and let $p$ and $q$ be real numbers with $0 < p < 1$ and $0 < q < 1$. <br>
+			Consider $n$ students $S_1,S_2,...,S_n$ who hand in an assignment for COMP 2804. This assignment has 2 questions.
+			For $i = 1,2,...,n$ let $A_i$ be the assignment handed in by student $S_i$. <br>
+			Alexa and Zoltan are TAs for the course. Alexa is supposed to mark the first question, whereas Zoltan
+			is supposed to mark the second question. Since both TAs are lazy, they use the following scheme
+			(all random choices are mutually independent): <br>
+			For $i = 1,2,...,n,$
+			<ul style="text-indent: 0;">
+				<li>Alexa marks the first question of assignment $A_i$ with probability $p$,</li>
+				<li>Zoltan marks the second question of assignment $A_i$ with probability $q$.</li>
+			</ul>
+			Consider the random variable
+			$$
+				X = \text{the number of assignments that are marked by both Alexa and Zoltan}.
+			$$
+			What is the expected value $\mathbb{E}(X)$ of the random variable $X$? <br>
+			<em>Hint:</em> Use indicator random variables.
+		]]></question>
+		<answer>$(p + q) \cdot n$</answer>
+		<answer>$\frac{n}{p \cdot q}$</answer>
+		<answer correct="correct">$p \cdot q \cdot n$</answer>
+		<answer>None of the above.</answer>
+	</multiple-choice>
+	<multiple-choice>
+		<question>
+			Who discovered the Fibonacci numbers?
+		</question>
+		<answer>Donald Trump</answer>
+		<answer correct="correct">
+			The Italian mathematician Fibonacci, also known as Leonardo Bonacci, Leonardo of Pisa, or Leonardo Bigollo Pisano
+		</answer>
+		<answer>Alexandre-Théophile Vandermonde</answer>
+		<answer>Keith Richards (the guitarist of the greatest rock band in the universe)</answer>
+	</multiple-choice>
+</quiz>

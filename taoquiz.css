@@ -1,0 +1,232 @@
+/*
+ * Basic layout rules
+ * Research shows that the optimal line length for reading is significantly
+ * less than the horizontal size of the average monitor.
+ * So, I limit the quiz to 7.7 inches and center it.
+ * Use Open Sans as the font. Unlike Arial, I find it tolerable.
+ *
+ * Also, use a small hanging indent on the questions. It looks nice.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+body {
+	margin: 0;
+	font-family: "Open Sans", sans-serif;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	max-width: 7.7in;
+	margin: 0 auto;
+	counter-reset: correct;
+}
+
+@media only screen and (max-width: 7.7in) {
+	main {
+		width: calc(100vw - 2rem);
+		max-width: calc(100vw - 2rem);
+		margin: 0 1rem;
+	}
+}
+
+hr {
+	margin: 2rem 0;
+}
+
+/* the correct size of the hanging indent depends on how long the question number is */
+.question:nth-of-type(n+1):nth-of-type(-n+9) {
+	padding-left: 1.15rem;
+	text-indent: -1.15rem;
+}
+
+.question:nth-of-type(n+10):nth-of-type(-n+99) {
+	padding-left: 1.65rem;
+	text-indent: -1.65rem;
+}
+
+.question:nth-of-type(n+100):nth-of-type(-n+999) {
+	padding-left: 2.15rem;
+	text-indent: -2.15rem;
+}
+
+/*
+ * Display the correct score.
+ * It's after everything else in the DOM so it uses the right count, but displayed first
+ * via order.
+ */
+#score {
+	display: none;
+	order: -1;
+	margin-bottom: 1rem;
+	font-size: 13.5pt;
+	color: #663399;
+}
+
+#titles {
+	order: -2;
+}
+
+#correct-count::before {
+	content: counter(correct);
+}
+
+.reveal-answers:checked ~ #score {
+	display: block;
+}
+
+.offscreen {
+	position: absolute;
+	left: -9999px;
+}
+
+#questions {
+	line-height: 1.45;
+}
+
+/*
+ * The reveal answers button
+ * Styled to look like an actual button, and disappears after being pressed
+ * My thanks to https://www.bestcssbuttongenerator.com/
+ */
+label.reveal-answers {
+	display: inline-block;
+	padding: 6px 24px;
+	border: 1px solid #124d77;
+	border-radius: 3px;
+	background: linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+	cursor: pointer;
+	font-size: 17px;
+	text-decoration: none;
+	color: #ffffff;
+	text-shadow: 0px 1px 0px #154682;
+}
+
+label.reveal-answers:hover {
+	background: linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+}
+
+label.reveal-answers:active {
+	position: relative;
+	top: 1px;
+}
+
+.reveal-answers:checked ~ #submit {
+	display: none;
+}
+
+/*
+ * After answers are revealed, don't let the user change what they picked.
+ * I thought about this for some time and ultimately there's no good reason to let them.
+ */
+.reveal-answers:checked ~ #questions > label, .reveal-answers:checked ~ #questions > input {
+	pointer-events: none;
+}
+
+/*
+ * Styling for multiple choice answers
+ * The following can be used as background color:
+ *  - Vivid green (if correct and selected)
+ *  - Red (if incorrect and selected)
+ *  - Faded green (if correct)
+ *  - Gray (if selected, but answers not revealed)
+ *
+ * The correct answer, once revealed, is also given a thicker border.
+ */
+label.mc-answer {
+	display: block;
+	padding: 0.55rem;
+	border: 2px solid #aaa;
+	border-radius: 0.6rem;
+	margin: 1rem 0;
+	cursor: pointer;
+}
+
+.mc-answer:checked + label {
+	border: 2px solid black;
+	background-color: lightgray !important;
+	cursor: default;
+}
+
+.mc-answer + label:hover {
+	background-color: #eee;
+}
+
+.reveal-answers:checked ~ #questions > input.mc-answer:checked + .correct {
+	background-color: #AFA !important;
+	counter-increment: correct;
+}
+
+.reveal-answers:checked ~ #questions > input.mc-answer:checked + :not(.correct) {
+	background-color: #F88 !important;
+}
+
+.reveal-answers:checked ~ #questions > .correct {
+	border-width: 5px;
+	background-color: #CFC;
+}
+
+/*
+ * Styling for short answer questions.
+ * The :valid pseudo-selector is used to test correctness.
+ */
+.short-answer {
+	width: 98%;
+	margin: 0.7rem 0;
+	font-size: 13.5pt;
+}
+
+@media only screen and (max-width: 7.7in) {
+	.short-answer {
+		width: 95%;
+	}
+}
+
+.short-answer-correct {
+	display: none;
+}
+
+.reveal-answers:checked ~ #questions > .short-answer-correct {
+	display: block;
+}
+
+.reveal-answers:checked ~ #questions > .short-answer:valid {
+	border: 3px solid #080;
+	counter-increment: correct;
+}
+
+.reveal-answers:checked ~ #questions > .short-answer:invalid {
+	border: 3px solid #F00;
+}
+
+/*
+ * The weird spelling is because the uBlock Origin annoyances list likes blocking this.
+ * Only show on Safari--in every other tested browser, the reveal answers button also
+ * scrolls to top.
+ */
+#bakk-to-top {
+	display: none;
+}
+
+.reveal-answers:not(:checked) ~ #bakk-to-top {
+	margin-top: 1rem;
+}
+
+/* "safari only" */
+@media not all and (min-resolution: .001dpcm) {
+	@supports (-webkit-appearance: none) and (stroke-color: transparent) {
+		#bakk-to-top {
+			display: block;
+		}
+	}
+}
+
+/* Standard faded footer */
+#credit, #credit > a {
+	color: #888;
+}
+
+#credit {
+	margin: 1rem 0;
+}

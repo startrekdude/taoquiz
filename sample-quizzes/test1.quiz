@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<quiz lang="en" title="Sample Quiz" subtitle="Do your best to answer the questions correctly.">
+	<multiple-choice>
+		<question>What is 23 × 3?</question>
+		<answer correct="correct">69</answer>
+		<answer>72</answer>
+		<answer>71</answer>
+		<answer>Undefined</answer>
+	</multiple-choice>
+	<short-answer answer-pattern="25">What is 5 squared?</short-answer>
+	<multiple-choice>
+		<question><![CDATA[
+			A red car and a blue car approach a country intersection. <br>
+			The red car approaches at 25 km/h. The blue car approaches at 50 km/h. <br>
+			This is just intended to test multiple lines so it isn't really fleshed out
+			as a question.
+		]]></question>
+		<answer correct="correct">That's true.</answer>
+		<answer>The blue car.</answer>
+		<answer>The red car.</answer>
+	</multiple-choice>
+</quiz>

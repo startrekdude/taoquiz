@@ -1,0 +1,54 @@
+doctype html
+
+mixin multiple-choice(question, index)
+	- const group = `multiple-choice-${index}`;
+	- let ch = 'a';
+	div.question!= `${index + 1}. ${question.question}`
+	each answer, index in question.answer
+		- const text    = typeof answer === "string" ? answer : answer._;
+		- const correct = !!answer.attr?.correct;
+		- const id      = `${group}-answer-${index}`;
+		input.mc-answer.offscreen(type="radio", id=id, name=group, autocomplete="off")
+		label.mc-answer(for=id, class=correct ? "correct" : "")= `(${ch}) ${text}`
+		- ch = String.fromCharCode(ch.charCodeAt(0) + 1);
+
+mixin short-answer(question, index)
+	- const id      = `short-answer-${index}`;
+	- const pattern = question.attr["answer-pattern"];
+	div.question
+		label(for=id)!= `${index + 1}. ${question._}`
+	input.short-answer(type="text", id=id, name=id, placeholder="Write your answer here", pattern=pattern, required, autocomplete="off")
+	br
+	span.short-answer-correct= `Correct answer: ${pattern}`
+
+html(lang=quiz.attr.lang)
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		title= quiz.attr.title
+		style!= styleRules
+	body
+		main
+			div#titles
+				h1= quiz.attr.title
+				if quiz.attr.subtitle
+					h3= quiz.attr.subtitle
+			input.reveal-answers.offscreen(type="checkbox", id="reveal-answers", name="reveal-answers", autocomplete="off")
+			div#questions
+				each question, index in quiz.children
+					if question["#name"] === "multiple-choice"
+						+ multiple-choice(question, index)
+					else if question["#name"] === "short-answer"
+						+ short-answer(question, index)
+					hr
+			div#score
+				| Score: 
+				span#correct-count
+				|  / #{quiz.children.length}
+			div#submit
+				label.reveal-answers(for="reveal-answers") Submit
+			div#bakk-to-top
+				a(href="#") Back to top
+			div#credit
+				| Created with ❤️ using 
+				a(href="https://github.com/startrekdude/taoquiz") Taoquiz
