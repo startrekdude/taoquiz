@@ -77,6 +77,99 @@ function renderMath(doc) {
 	return moveGlobalCache(adaptor.doctype(converter.document) + "\n" + adaptor.outerHTML(adaptor.root(converter.document)));
 }
 
+function minPositive(...nums) {
+	let result = -1;
+	for (const num of nums) {
+		if (num > 0 && (result == -1 || num < result)) {
+			result = num;
+		}
+	}
+	return result;
+}
+
+function processQuestion(question) {
+	/*
+	 * This fixes a problem on mobile browsers and other scenarios with a small device width.
+	 * When you have inline math directly adjacent to (i.e. no spaces between) text, it's able to
+	 * insert a line break between them, which looks bad.
+	 *
+	 * To fix this, wrap it in a span displayed as an inline block.
+	 * Example:
+	 *   [the $(m + 2)$-th Fibonacci number] becomes
+	 *   [the <span class="sticky">$(m + 2)$-th</span> Fibonacci number]
+	 */
+	 
+	let result = ""
+	let index  = 0;
+	let lastCp = 0;
+	let begin$ = -1;
+	let end$   = -1;
+	let preSp  = -1;
+	let postSp = -1;
+	
+	while ((begin$ = question.indexOf("$", index)) != -1) {
+		// If it's escaped, and doesn't actually start math mode, continue
+		if (question.charAt(begin$ - 1) == "\\") {
+			index = begin$ + 1;
+			continue;
+		}
+		
+		end$   = question.indexOf("$", begin$ + 1);
+		preSp  = Math.max(
+			question.lastIndexOf(" " , begin$),
+			question.lastIndexOf("\n", begin$),
+			question.lastIndexOf("\t", begin$),
+			question.lastIndexOf(">" , begin$)
+		)
+		postSp = minPositive(
+			question.indexOf(" " , end$),
+			question.indexOf("\n", end$),
+			question.indexOf("\t", end$),
+			question.indexOf("<" , end$)
+		)
+		
+		// If there are spaces directly to either side of the math mode, there's nothing to do.
+		if (preSp == begin$ - 1 && postSp == end$ + 1) {
+			index = postSp + 1;
+			result += question.substring(lastCp, index);
+			lastCp = index;
+			continue;
+		}
+		
+		if (preSp == -1) {
+			preSp = begin$;
+		}
+		if (postSp == -1) {
+			postSp = question.length;
+		}
+		
+		// Otherwise, insert the appropriate tag
+		result += question.substring(lastCp, preSp + 1);
+		result += '<span class="sticky">';
+		result += question.substring(preSp + 1, postSp);
+		result += "</span>";
+		lastCp = postSp;
+		index  = lastCp;
+	}
+	
+	result += question.substring(lastCp);
+	
+	return result;
+}
+
+function processQuestions(quiz) {
+	// hand each question's text over to processQuestion for transforming
+	for (const question of quiz.children) {
+		if (question["#name"] === "multiple-choice") {
+			question.question = processQuestion(question.question);
+		} else if (question["#name"] === "short-answer") {
+			question._ = processQuestion(question._);
+		}
+	}
+	
+	return quiz;
+}
+
 function renderQuiz(quiz) {
 	// includes the style rules inline
 	const styleRules = stripCssComments(fs.readFileSync(__dirname + "/taoquiz.css", "utf-8"));
@@ -90,14 +183,20 @@ function renderQuiz(quiz) {
 	return result;
 }
 
+async function readStdin() {
+	const chunks = [];
+	for await (const chunk of process.stdin) chunks.push(chunk);
+	return Buffer.concat(chunks).toString("utf-8");
+}
+
 async function main(args) {
 	if (args.length < 1) {
 		console.log("Usage: taoquiz <file.quiz> [result.html]");
 		process.exit(1);
 	}
 	
-	const input  = fs.readFileSync(args[0], "utf-8");
-	const quiz   = await parseQuiz(input);
+	const input  = args[0] === "-" ? await readStdin() : fs.readFileSync(args[0], "utf-8");
+	const quiz   = processQuestions(await parseQuiz(input));
 	const output = renderQuiz(quiz);
 	
 	const outPath = args.length > 1 ? args[1] : changeExtension(args[0], ".html");

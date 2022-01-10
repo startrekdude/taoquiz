@@ -25,9 +25,9 @@ main {
 
 @media only screen and (max-width: 7.7in) {
 	main {
-		width: calc(100vw - 2rem);
-		max-width: calc(100vw - 2rem);
-		margin: 0 1rem;
+		width: calc(100vw - 2.45rem);
+		max-width: calc(100vw - 2.45rem);
+		margin: 0 auto;
 	}
 }
 
@@ -49,6 +49,14 @@ hr {
 .question:nth-of-type(n+100):nth-of-type(-n+999) {
 	padding-left: 2.15rem;
 	text-indent: -2.15rem;
+}
+
+.question * {
+	text-indent: 0;
+}
+
+.sticky {
+	display: inline-block;
 }
 
 /*
