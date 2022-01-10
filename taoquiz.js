@@ -109,12 +109,18 @@ function processQuestion(question) {
 	
 	while ((begin$ = question.indexOf("$", index)) != -1) {
 		// If it's escaped, and doesn't actually start math mode, continue
-		if (question.charAt(begin$ - 1) == "\\") {
+		if (question.charAt(begin$ - 1) === "\\") {
 			index = begin$ + 1;
 			continue;
 		}
 		
-		end$   = question.indexOf("$", begin$ + 1);
+		// find the next _unescaped_ $
+		end$ = begin$;
+		while (end$ < question.length) {
+			end$ = question.indexOf("$", end$ + 1);
+			if (question.charAt(end$ - 1) !== "\\") break;
+		}
+		
 		preSp  = Math.max(
 			question.lastIndexOf(" " , begin$),
 			question.lastIndexOf("\n", begin$),
@@ -160,6 +166,8 @@ function processQuestion(question) {
 function processQuestions(quiz) {
 	// hand each question's text over to processQuestion for transforming
 	for (const question of quiz.children) {
+		if (question?.attr?.raw) continue;
+		
 		if (question["#name"] === "multiple-choice") {
 			question.question = processQuestion(question.question);
 		} else if (question["#name"] === "short-answer") {
