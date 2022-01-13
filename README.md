@@ -33,7 +33,7 @@ Taoquiz is a tool that compiles quizzes expressed as `.quiz` files (see the `sam
 Usage: taoquiz <file.quiz> [result.html]
 ```
 
-See `sample-quizzes/` for examples of the input format.
+See `sample-quizzes/` for examples of the input format, and consult [auto-sticky.md](auto-sticky.md) for some things to be aware of if you're a heavy user of math mode.
 
 ## License
 
