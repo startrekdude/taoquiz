@@ -87,7 +87,7 @@ function minPositive(...nums) {
 	return result;
 }
 
-function processQuestion(question) {
+function autoSticky(question) {
 	/*
 	 * This fixes a problem on mobile browsers and other scenarios with a small device width.
 	 * When you have inline math directly adjacent to (i.e. no spaces between) text, it's able to
@@ -97,6 +97,8 @@ function processQuestion(question) {
 	 * Example:
 	 *   [the $(m + 2)$-th Fibonacci number] becomes
 	 *   [the <span class="sticky">$(m + 2)$-th</span> Fibonacci number]
+	 *
+	 * (see auto-sticky.md for more details)
 	 */
 	 
 	let result = ""
@@ -119,6 +121,12 @@ function processQuestion(question) {
 		while (end$ < question.length) {
 			end$ = question.indexOf("$", end$ + 1);
 			if (question.charAt(end$ - 1) !== "\\") break;
+		}
+		
+		// Skip zero-length math blocks (typically actually the boundaries of display math)
+		if (end$ === begin$ + 1) {
+			index = end$ + 1;
+			continue;
 		}
 		
 		preSp  = Math.max(
@@ -164,14 +172,16 @@ function processQuestion(question) {
 }
 
 function processQuestions(quiz) {
+	if (!!!quiz.attr.mathjax) return quiz;
+	
 	// hand each question's text over to processQuestion for transforming
 	for (const question of quiz.children) {
 		if (question?.attr?.raw) continue;
 		
 		if (question["#name"] === "multiple-choice") {
-			question.question = processQuestion(question.question);
+			question.question = autoSticky(question.question);
 		} else if (question["#name"] === "short-answer") {
-			question._ = processQuestion(question._);
+			question._ = autoSticky(question._);
 		}
 	}
 	

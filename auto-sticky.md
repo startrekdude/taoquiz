@@ -34,7 +34,6 @@ Observe how not all inline math blocks are wrapped—only the ones adjacent to t
 ## Implementation Notes
 
 - Auto-sticky knows about `\$`, and doesn't consider it to be starting or ending inline math.
-- It doesn't have any special handling for `$$`. It's odd to the extreme to encounter TeX that doesn't already have whitespace to either side of that token[^2], but it's something to be aware of.
 - It explicitly **does not** support constructions of the form `$A = \text{``$a_i$ is odd''}$`—that is, math within `\text` within math. If this is a problem for you (which is fair), you can:
   - Use `\(` and `\)` to delimit the inner math; or
   - Mark the question (the `multiple-choice` or `short-answer`) as `raw="raw"`, which will disable non-MathJax processing of questions and answers[^3].
