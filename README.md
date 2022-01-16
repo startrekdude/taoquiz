@@ -6,6 +6,8 @@
 
 Taoquiz is a tool that compiles quizzes expressed as `.quiz` files (see the `sample-quizzes/` directory) into beautiful, lightweight, interactive, fully static, and standalone `.html` files (with *absolutely no* client JavaScript!). Full support for MathJax is included; wrap TeX math expressions in `$` or `$$` as appropriate.
 
+[Try it live!](https://people.scs.carleton.ca/~samhaskins/2804/)
+
 ## Features
 
 * Multiple choice and short answer question types.
