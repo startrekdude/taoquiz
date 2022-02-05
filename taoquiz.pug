@@ -47,7 +47,7 @@ html(lang=quiz.attr.lang)
 							+ short-answer(question, index)
 			div#score
 				| Score: 
-				span#correct-count
+				span.count
 				|  / #{quiz.children.length}
 			div
 				label#submit(
@@ -57,12 +57,12 @@ html(lang=quiz.attr.lang)
 				) Submit
 			div#bakk-to-top
 				a(href="#") Back to top
-			footer
-				| Created with ❤️ using 
-				a(href="https://github.com/startrekdude/taoquiz") Taoquiz
-			script.
-				//- Follow button WAI-ARIA
-				//- https://www.w3.org/TR/wai-aria-practices-1.2/#button
-				document.getElementById('submit').onkeydown = e => {
-					if (e.key === " " || e.key === "Enter") e.target.click()
-				}
+		footer
+			| Created with ❤️ using 
+			a(href="https://github.com/startrekdude/taoquiz") Taoquiz
+		script.
+			//- Follow button WAI-ARIA
+			//- https://www.w3.org/TR/wai-aria-practices-1.2/#button
+			document.getElementById('submit').onkeydown = e => {
+				if (e.key === " " || e.key === "Enter") e.target.click()
+			}

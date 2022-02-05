@@ -74,7 +74,7 @@ ol > li {
 	color: #663399;
 }
 
-#correct-count::before {
+#score span.count::before {
 	content: counter(correct);
 }
 
