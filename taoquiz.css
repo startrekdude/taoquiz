@@ -11,15 +11,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 body {
-	margin: 0;
+	margin: 0 auto;
+	max-width: 7.7in;
 	font-family: "Open Sans", sans-serif;
 }
 
 main {
 	display: flex;
 	flex-direction: column;
-	max-width: 7.7in;
-	margin: 0 auto;
 	counter-reset: correct;
 }
 
@@ -73,10 +72,6 @@ ol > li {
 	margin-bottom: 1rem;
 	font-size: 13.5pt;
 	color: #663399;
-}
-
-#titles {
-	order: -2;
 }
 
 #correct-count::before {

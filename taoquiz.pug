@@ -26,11 +26,11 @@ html(lang=quiz.attr.lang)
 		title= quiz.attr.title
 		style!= styleRules
 	body
+		header
+			h1= quiz.attr.title
+			if quiz.attr.subtitle
+				h3= quiz.attr.subtitle
 		main(role="form")
-			div#titles
-				h1= quiz.attr.title
-				if quiz.attr.subtitle
-					h3= quiz.attr.subtitle
 			input#reveal-answers.offscreen(
 				type="checkbox",
 				name="reveal-answers",
