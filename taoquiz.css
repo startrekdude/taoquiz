@@ -23,6 +23,33 @@ main {
 	counter-reset: correct;
 }
 
+ol {
+	padding: 0;
+	margin: 0;
+}
+
+legend {
+	display: list-item;
+	margin: 0 0 1rem 1.15rem
+}
+
+li:nth-of-type(1n + 10) legend {
+	margin-left: 1.65rem;
+}
+
+li:nth-of-type(1n + 100) legend {
+	margin-left: 2.15rem;
+}
+
+ol > li {
+	contain: layout;
+	
+	display: block;
+	padding: 0 0 1rem;
+	margin: 0 0 2rem;
+	border-block-end: 2px solid #ccc;
+}
+
 @media only screen and (max-width: 7.7in) {
 	main {
 		width: calc(100vw - 2.45rem);
@@ -31,39 +58,15 @@ main {
 	}
 }
 
-hr {
-	margin: 2rem 0;
-}
-
-/* the correct size of the hanging indent depends on how long the question number is */
-.question:nth-of-type(n+1):nth-of-type(-n+9) {
-	padding-left: 1.15rem;
-	text-indent: -1.15rem;
-}
-
-.question:nth-of-type(n+10):nth-of-type(-n+99) {
-	padding-left: 1.65rem;
-	text-indent: -1.65rem;
-}
-
-.question:nth-of-type(n+100):nth-of-type(-n+999) {
-	padding-left: 2.15rem;
-	text-indent: -2.15rem;
-}
-
-.question * {
-	text-indent: 0;
-}
-
 .sticky {
 	display: inline-block;
 }
 
 /*
- * Display the correct score.
- * It's after everything else in the DOM so it uses the right count, but displayed first
- * via order.
- */
+* Display the correct score.
+* It's after everything else in the DOM so it uses the right count, but displayed first
+* via order.
+*/
 #score {
 	display: none;
 	order: -1;
@@ -80,7 +83,7 @@ hr {
 	content: counter(correct);
 }
 
-.reveal-answers:checked ~ #score {
+#reveal-answers:checked ~ #score {
 	display: block;
 }
 
@@ -94,14 +97,14 @@ hr {
 }
 
 /*
- * The reveal answers button
- * Styled to look like an actual button, and disappears after being pressed
- * My thanks to https://www.bestcssbuttongenerator.com/
- */
-label.reveal-answers {
+* The reveal answers button
+* Styled to look like an actual button, and disappears after being pressed
+* My thanks to https://www.bestcssbuttongenerator.com/
+*/
+#submit {
 	display: inline-block;
 	padding: 6px 24px;
-	border: 1px solid #124d77;
+	outline: 1px solid #124d77;
 	border-radius: 3px;
 	background: linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
 	cursor: pointer;
@@ -111,25 +114,41 @@ label.reveal-answers {
 	text-shadow: 0px 1px 0px #154682;
 }
 
-label.reveal-answers:hover {
+#submit:hover {
 	background: linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
 }
 
-label.reveal-answers:active {
-	position: relative;
-	top: 1px;
-}
-
-.reveal-answers:checked ~ #submit {
+#reveal-answers:checked ~ #submit {
 	display: none;
 }
 
 /*
- * After answers are revealed, don't let the user change what they picked.
- * I thought about this for some time and ultimately there's no good reason to let them.
- */
-.reveal-answers:checked ~ #questions > label, .reveal-answers:checked ~ #questions > input {
+* After answers are revealed, don't let the user change what they picked.
+* I thought about this for some time and ultimately there's no good reason to let them.
+*/
+#reveal-answers:checked ~ #questions label,
+#reveal-answers:checked ~ #questions input {
 	pointer-events: none;
+}
+
+.multiple-choice label {
+	display: block;
+	
+	padding: 0.5em;
+	
+	margin-bottom: 1.5rem;
+	padding-left: 2rem;
+
+	outline: 2px solid #aaa;
+	border-radius: 0.6rem;
+
+	cursor: pointer;
+}
+
+.multiple-choice input {
+	float: left;
+	margin: 1em 0 0 0.75rem;
+	z-index: 1;
 }
 
 /*
@@ -142,37 +161,28 @@ label.reveal-answers:active {
  *
  * The correct answer, once revealed, is also given a thicker border.
  */
-label.mc-answer {
-	display: block;
-	padding: 0.55rem;
-	border: 2px solid #aaa;
-	border-radius: 0.6rem;
-	margin: 1rem 0;
-	cursor: pointer;
-}
-
-.mc-answer:checked + label {
-	border: 2px solid black;
-	background-color: lightgray !important;
+input:checked + label {
+	background-color: #eee;
+	outline-color: #000 !important;
 	cursor: default;
 }
 
-.mc-answer + label:hover {
+input[type="radio"] + label:hover {
 	background-color: #eee;
 }
 
-.reveal-answers:checked ~ #questions > input.mc-answer:checked + .correct {
-	background-color: #AFA !important;
+#reveal-answers:checked ~ #questions input:checked + .correct {
+	background-color: #afa;
 	counter-increment: correct;
 }
 
-.reveal-answers:checked ~ #questions > input.mc-answer:checked + :not(.correct) {
-	background-color: #F88 !important;
+#reveal-answers:checked ~ #questions input:checked + :not(.correct) {
+	background-color: #f88;
 }
 
-.reveal-answers:checked ~ #questions > .correct {
-	border-width: 5px;
-	background-color: #CFC;
+#reveal-answers:checked ~ #questions .correct {
+	background-color: #cfc;
+	outline: 5px solid #aaa;
 }
 
 /*
@@ -180,9 +190,9 @@ label.mc-answer {
  * The :valid pseudo-selector is used to test correctness.
  */
 .short-answer {
-	width: 98%;
-	margin: 0.7rem 0;
 	font-size: 13.5pt;
+	margin-bottom: 1rem;
+	width: 100%;
 }
 
 @media only screen and (max-width: 7.7in) {
@@ -195,17 +205,17 @@ label.mc-answer {
 	display: none;
 }
 
-.reveal-answers:checked ~ #questions > .short-answer-correct {
+#reveal-answers:checked ~ #questions .short-answer-correct {
 	display: block;
 }
 
-.reveal-answers:checked ~ #questions > .short-answer:valid {
-	border: 3px solid #080;
+#reveal-answers:checked ~ #questions .short-answer:valid {
+	border: 3px solid #393;
 	counter-increment: correct;
 }
 
-.reveal-answers:checked ~ #questions > .short-answer:invalid {
-	border: 3px solid #F00;
+#reveal-answers:checked ~ #questions .short-answer:invalid {
+	border: 3px solid #f33;
 }
 
 /*
@@ -222,7 +232,7 @@ label.mc-answer {
 }
 
 /* "safari only" */
-@media not all and (min-resolution: .001dpcm) {
+@media not all and (min-resolution: 0.001dpcm) {
 	@supports (-webkit-appearance: none) and (stroke-color: transparent) {
 		#bakk-to-top {
 			display: block;
@@ -231,10 +241,11 @@ label.mc-answer {
 }
 
 /* Standard faded footer */
-#credit, #credit > a {
+footer,
+footer > * {
 	color: #888;
 }
 
-#credit {
+footer {
 	margin: 1rem 0;
 }
