@@ -4,12 +4,12 @@ mixin multiple-choice(question, index)
 	- const group = `multiple-choice-${index}`;
 	- let ch = 'a';
 	div.question!= `${index + 1}. ${question.question}`
-	each answer, index in question.answer
+	each answer, index in Array.isArray(question.answer) ? question.answer : [question.answer]
 		- const text    = typeof answer === "string" ? answer : answer._;
 		- const correct = !!answer.attr?.correct;
 		- const id      = `${group}-answer-${index}`;
 		input.mc-answer.offscreen(type="radio", id=id, name=group, autocomplete="off")
-		label.mc-answer(for=id, class=correct ? "correct" : "")= `(${ch}) ${text}`
+		label.mc-answer(for=id, class=correct ? "correct" : "")!= `(${ch}) ${text}`
 		- ch = String.fromCharCode(ch.charCodeAt(0) + 1);
 
 mixin short-answer(question, index)
